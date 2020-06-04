@@ -1,0 +1,3 @@
+[submodule "beebs"]
+	path = beebs
+	url = https://github.com/mageec/beebs.git
