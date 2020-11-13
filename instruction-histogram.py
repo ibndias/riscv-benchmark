@@ -50,6 +50,6 @@ for name in base:
         df = pd.concat([df, obj], axis=1, sort=False)
 
 df.axes[1].name = "Name"
-df = df.reindex(['slw','ssw','ld','st','mul','div','reg','ecall','others'])
+df = df.reindex(['slli','srli','ld','st','mul','div','reg','ecall','others'])
 df = df.fillna(0).astype('Int64')
 out(df, "performance")

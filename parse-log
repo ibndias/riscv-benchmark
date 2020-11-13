@@ -26,10 +26,10 @@ idx = 0
 status = -2
 
 def category(ins):
-    if 'ssw' in ins:
-        return 'ssw'
-    if 'slw' in ins:
-        return 'slw'
+    if 'slli' in ins:
+        return 'slli'
+    if 'srli' in ins:
+        return 'srli'
     for cat in ins_dict:
         for ins_ in ins_dict[cat]:
             if ins_ in ins:
@@ -58,7 +58,7 @@ for line in lines:
         ins = category(arr[idx])
         if ins in "":
             print line
-            assert False, "unknow instruction!!" 
+            assert False, "unknown instruction!!" 
 
         if ins in histogram.keys():
             histogram[ins]+=1
