@@ -1,3 +1,4 @@
 [submodule "beebs"]
 	path = beebs
-	url = https://github.com/mageec/beebs.git
+	url = https://github.com/ibndias/beebs.git
+	branch = bti
