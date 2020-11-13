@@ -1,1 +1,1 @@
-# Benchmarking for RIMI
+# Benchmarking for BTI
