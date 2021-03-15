@@ -10,7 +10,7 @@ ins_dict = {}
 ins_dict['ld'] = ['lb','lh','lw','ld','flw','fld','lhu','lbu']
 ins_dict['st'] = ['sb','sh','sw','sd','fsw','fsd']
 ins_dict['li'] = ['li','lui','auipc','fmv','fcvt','fsgn','flt','fle','feq','fcmp','fclass','mv']
-ins_dict['arith'] = ['add','addi','sub','fadd','fsub']
+ins_dict['arith'] = ['add','addi','sub','fadd','fsub', 'fsqrt']
 ins_dict['logic'] = ['and','or','sll','slt','sra','srl','xor','sne','not','seq']
 ins_dict['branch'] = ['beq','bge','blt','bne','bnez','jal','j']
 ins_dict['sys'] = ['sret','mret','dret','ebreak','ret','epc']
@@ -18,7 +18,7 @@ ins_dict['ecall'] = ['ecall']
 ins_dict['csr'] = ['csr']
 ins_dict['mul'] = ['mul','fmul']
 ins_dict['div'] = ['div','rem','fdiv']
-ins_dict['others'] = ['wfi','sfence_vma','fence','sc_d','sc_w','lr_d','lr_w']
+ins_dict['others'] = ['wfi','sfence_vma','fence','sc_d','sc_w','lr_d','lr_w','sext.w']
 ins_dict['nop'] = ['nop']
 
 en = -1
@@ -26,10 +26,6 @@ idx = 0
 status = -2
 
 def category(ins):
-    if 'slli' in ins:
-        return 'slli'
-    if 'srli' in ins:
-        return 'srli'
     for cat in ins_dict:
         for ins_ in ins_dict[cat]:
             if ins_ in ins:

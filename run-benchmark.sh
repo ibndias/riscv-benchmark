@@ -7,14 +7,16 @@
 
 source env.sh
 
-RISCV_CC="clang --target=riscv32 -march=rv32g"
+#RISCV_CC="clang --target=riscv32 -march=rv32g"
+#RISCV_CC="riscv64-unknown-elf-gcc -march=rv64g"
+RISCV_CC="../riscv-mte/install/bin/riscv64-unknown-elf-gcc -march=rv64g"
 
 BENCHMARKS=($(ls -d beebs/src/*/ | xargs -n 1 basename))
 
 EXCLUDE_BENCHMARKS=(ctl matmult sglib-arraysort trio compress ctl-string cover dtoa huffbench levenshtein picojpeg slre qrduino strstr nettle-sha256 miniz nsichneu rijndael wikisort)
 
 echo "Using Proxy Kernel"
-CHIP=bti
+CHIP=mte-mpk
 BOARD=generic
 
 rm -rf results/*.elf
