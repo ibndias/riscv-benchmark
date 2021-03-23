@@ -5,15 +5,16 @@
 # Fail on error
 #set -e
 
-source env.sh
+#source env.sh
 
 #RISCV_CC="clang --target=riscv32 -march=rv32g"
 #RISCV_CC="riscv64-unknown-elf-gcc -march=rv64g"
-RISCV_CC="../riscv-mte/install/bin/riscv64-unknown-elf-gcc -march=rv64g"
+RISCV_CC="riscv64-unknown-elf-gcc"
 
 BENCHMARKS=($(ls -d beebs/src/*/ | xargs -n 1 basename))
 
-EXCLUDE_BENCHMARKS=(ctl matmult sglib-arraysort trio compress ctl-string cover dtoa huffbench levenshtein picojpeg slre qrduino strstr nettle-sha256 miniz nsichneu rijndael wikisort)
+#EXCLUDE_BENCHMARKS=(ctl matmult sglib-arraysort trio compress ctl-string cover dtoa huffbench levenshtein picojpeg slre qrduino strstr nettle-sha256 miniz nsichneu rijndael wikisort)
+EXCLUDE_BENCHMARKS=(ctl matmult sglib-arraysort trio)
 
 echo "Using Proxy Kernel"
 CHIP=mte-mpk
@@ -26,7 +27,6 @@ rm -rf results/*.hist
 
 # compile beebs
 cd beebs
-
 ./configure CC="$RISCV_CC" --host=riscv${RISCV_XLEN}-unknown-elf --with-chip=$CHIP --with-board=$BOARD
 make clean
 make
@@ -37,9 +37,9 @@ for i in "${BENCHMARKS[@]}"; do
 
     cp src/$i/$i ../results/$i.elf 
     echo -n "Executing $i"
-    spike -l $PK ../results/$i.elf 1> ../results/$i.out 2> ../results/$i.log
-    ../parse-log ../results/$i.log > ../results/$i.hist
-    echo "done"
+    # spike -l $PK ../results/$i.elf 1> ../results/$i.out 2> ../results/$i.log
+    # ../parse-log ../results/$i.log > ../results/$i.hist
+    echo " [DONE]"
 done
 
 cd - > /dev/null
