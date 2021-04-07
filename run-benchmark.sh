@@ -5,11 +5,12 @@
 # Fail on error
 #set -e
 
-#source env.sh
+source env.sh
 
 #RISCV_CC="clang --target=riscv32 -march=rv32g"
 #RISCV_CC="riscv64-unknown-elf-gcc -march=rv64g"
-RISCV_CC="riscv64-unknown-elf-gcc"
+#RISCV_CC="riscv64-unknown-elf-gcc"
+#RISCV_CC="clang -march=rv64g"
 
 BENCHMARKS=($(ls -d beebs/src/*/ | xargs -n 1 basename))
 
@@ -24,10 +25,11 @@ rm -rf results/*.elf
 rm -rf results/*.out
 rm -rf results/*.log
 rm -rf results/*.hist
-
+mkdir results
 # compile beebs
 cd beebs
-./configure CC="$RISCV_CC" --host=riscv${RISCV_XLEN}-unknown-elf --with-chip=$CHIP --with-board=$BOARD
+# set -o xtrace
+./configure CC="clang" CFLAGS="-g -O0 -static -march=rv64g" --host=riscv${RISCV_XLEN}-unknown-elf --with-chip=$CHIP --with-board=$BOARD
 make clean
 make
 for i in "${BENCHMARKS[@]}"; do
