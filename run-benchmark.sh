@@ -17,7 +17,7 @@ BENCHMARKS=($(ls -d beebs/src/*/ | xargs -n 1 basename))
 #EXCLUDE_BENCHMARKS=(ctl matmult sglib-arraysort trio compress ctl-string cover dtoa huffbench levenshtein picojpeg slre qrduino strstr nettle-sha256 miniz nsichneu rijndael wikisort)
 EXCLUDE_BENCHMARKS=(ctl matmult sglib-arraysort trio)
 
-echo "Using Proxy Kernel"
+#echo "Using Proxy Kernel"
 CHIP=mte-mpk
 BOARD=generic
 
@@ -29,7 +29,8 @@ mkdir results
 # compile beebs
 cd beebs
 # set -o xtrace
-./configure CC="clang" CFLAGS="-g -O0 -static -march=rv64g" --host=riscv${RISCV_XLEN}-unknown-elf --with-chip=$CHIP --with-board=$BOARD
+#./configure CC="clang" CFLAGS="-g -O0 -static -march=rv64g" --host=riscv${RISCV_XLEN}-unknown-elf --with-chip=$CHIP --with-board=$BOARD
+./configure CC="clang" CFLAGS="-g3 -O0 -static -march=rv64g" --host=riscv${RISCV_XLEN}-unknown-elf --with-chip=$CHIP --with-board=$BOARD --enable-shared=no --enable-static=yes
 make clean
 make
 for i in "${BENCHMARKS[@]}"; do
